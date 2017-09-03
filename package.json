@@ -1,6 +1,6 @@
 {
   "name": "vega-spec-injector",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vega helper library to simplify modification of the Vega and VegaLite JSON before parsing.",
   "main": "cjs/index.js",
   "browser": "dist/vegaSpecInjector.js",
