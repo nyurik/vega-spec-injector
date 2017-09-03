@@ -28,3 +28,10 @@ export default {
   moduleName: name,
   format: `umd`
 };
+
+//// next rollup version, once size plugin is updated
+// input: `src/index.js`,
+// plugins,
+// file: `dist/${name}${isProd ? `.min` : ``}.js`,
+// name,
+// output: {format: `umd`}
