@@ -1,9 +1,9 @@
 import VSI from '../src/index';
 
-describe('addSignals', () => {
+describe('addToList', () => {
   it('empty', () => {
     const spec = {};
-    const result = new VSI().addSignals(spec, []);
+    const result = new VSI().addToList(spec, `signals`, []);
     expect(spec).toBe(result);
     expect(spec.signals).toBeDefined();
     expect(spec.signals).toEqual([]);
@@ -12,7 +12,7 @@ describe('addSignals', () => {
   it('empty signals', () => {
     const signals = [];
     const spec = {signals: signals};
-    const result = new VSI().addSignals(spec, []);
+    const result = new VSI().addToList(spec, `signals`, []);
     expect(spec).toBe(result);
     expect(spec.signals).toBeDefined();
     expect(spec.signals).toBe(signals);
@@ -20,7 +20,7 @@ describe('addSignals', () => {
 
   it('add new', () => {
     const spec = {};
-    const result = new VSI().addSignals(spec, [`sig`]);
+    const result = new VSI().addToList(spec, `signals`, [`sig`]);
     expect(spec).toBe(result);
     expect(spec.signals).toBeDefined();
     expect(spec.signals).toEqual([{name: `sig`}]);
@@ -29,7 +29,7 @@ describe('addSignals', () => {
   it('add new to empty array', () => {
     const signals = [];
     const spec = {signals: signals};
-    const result = new VSI().addSignals(spec, []);
+    const result = new VSI().addToList(spec, `signals`, []);
     expect(spec).toBe(result);
     expect(spec.signals).toBeDefined();
     expect(spec.signals).toBe(signals);
@@ -38,7 +38,7 @@ describe('addSignals', () => {
   it('no new sig', () => {
     const signals = [{name: `sig`}];
     const spec = {signals: signals};
-    const result = new VSI().addSignals(spec, []);
+    const result = new VSI().addToList(spec, `signals`, []);
     expect(spec).toBe(result);
     expect(spec.signals).toEqual([{name: `sig`}]);
   });
@@ -46,7 +46,7 @@ describe('addSignals', () => {
   it('same as defined', () => {
     const signals = [{name: `sig`, v: 1}];
     const spec = {signals: signals};
-    const result = new VSI().addSignals(spec, [`sig`]);
+    const result = new VSI().addToList(spec, `signals`, [`sig`]);
     expect(spec).toBe(result);
     expect(spec.signals).toBeDefined();
     expect(spec.signals).toEqual([{name: `sig`, v: 1}]);
@@ -55,7 +55,7 @@ describe('addSignals', () => {
   it('add new to existing', () => {
     const signals = [{name: `sig`, v: 1}];
     const spec = {signals: signals};
-    const result = new VSI().addSignals(spec, [`sig2`]);
+    const result = new VSI().addToList(spec, `signals`, [`sig2`]);
     expect(spec).toBe(result);
     expect(spec.signals).toBeDefined();
     expect(spec.signals).toEqual([{name: `sig`, v: 1}, {name: `sig2`}]);
@@ -63,7 +63,7 @@ describe('addSignals', () => {
 
   it('add new obj to existing', () => {
     const spec = {signals: [{name: `sig`, v: 1}]};
-    const result = new VSI().addSignals(spec, [{name:`sig2`}]);
+    const result = new VSI().addToList(spec, `signals`, [{name:`sig2`}]);
     expect(spec).toBe(result);
     expect(spec.signals).toBeDefined();
     expect(spec.signals).toEqual([{name: `sig`, v: 1}, {name: `sig2`}]);
@@ -71,7 +71,7 @@ describe('addSignals', () => {
 
   it('add multiple new obj to existing', () => {
     const spec = {signals: [{name: `sig`, v: 1}]};
-    const result = new VSI().addSignals(spec, [{name: `sig2`, v: 2}, `sig3`]);
+    const result = new VSI().addToList(spec, `signals`, [{name: `sig2`, v: 2}, `sig3`]);
     expect(spec).toBe(result);
     expect(spec.signals).toBeDefined();
     expect(spec.signals).toEqual([{name: `sig`, v: 1}, {name: `sig2`, v: 2}, {name: `sig3`}]);

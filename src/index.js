@@ -5,32 +5,34 @@ export default class {
   }
 
   /**
-   * Add signals to a vega spec, or ignore if the signal is already defined.
+   * Add values like signals to a vega spec, or ignore if the they are already defined.
    * @param {object} spec vega spec to modify and return
-   * @param {<object|string>[]} signals
+   * @param {string} field name of the vega spec branch, e.g. `signals`
+   * @param {<object|string>[]} values to add
    * @return {object} returns the same spec object as passed in
    */
-  addSignals(spec, signals) {
-    const newSigs = new Map(signals.map(v => typeof v === `string` ? [v, {name: v}] : [v.name, v]));
+  addToList(spec, field, values) {
+    const newSigs = new Map(values.map(v => typeof v === `string` ? [v, {name: v}] : [v.name, v]));
 
-    for (const sig of this.findUndefined(spec, `signals`, newSigs.keys())) {
-      spec.signals.push(newSigs.get(sig));
+    for (const sig of this.findUndefined(spec, field, newSigs.keys())) {
+      spec[field].push(newSigs.get(sig));
     }
+
     return spec;
   }
 
   /**
    * Set a spec field, and warn if overriding an existing value in that field
    * @param {object} spec vega spec to modify and return
-   * @param {string} key
+   * @param {string} field
    * @param {*} value
    * @return {object} returns the same spec object as passed in
    */
-  overrideField(spec, key, value) {
-    if (spec[key] && spec[key] !== value) {
-      this.onWarning(`Overriding ${key}: ${spec[key]} 𐃘 ${value}`);
+  overrideField(spec, field, value) {
+    if (spec[field] && spec[field] !== value) {
+      this.onWarning(`Overriding ${field}: ${spec[field]} 𐃘 ${value}`);
     }
-    spec[key] = value;
+    spec[field] = value;
     return spec;
   }
 
